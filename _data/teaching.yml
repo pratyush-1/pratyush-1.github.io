@@ -1,0 +1,7 @@
+- year: 2023
+  courses:
+    - title: Introduction to Deep Learning
+      description: These slides cover entire deep learning from basic till generative models like GANs and Diffusion Based Models. 
+                    In this lectures I taught the Diffusion models and Text to Image using Stable Diffusion. The Linktree also contains codes and notebooks used for demonstration in the workshop.
+      url: https://docs.google.com/presentation/d/1f22vKHfdNLD2LcVNi-UhfZ5cG_6ENEOP_DmcXz8KH5I/edit?usp=sharing
+      linktree: https://linktr.ee/dl_workshop?utm_source=linktree_profile_share&ltsid=84e5ac63-9c82-4d22-9425-5954a9ee3b03

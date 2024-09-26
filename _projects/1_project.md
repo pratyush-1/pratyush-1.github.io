@@ -1,81 +1,38 @@
 ---
 layout: page
-title: project 1
-description: with background image
-img: assets/img/12.jpg
+title: SAM-PM Enhancing Video Camouflaged Object Detection
+description: 
+img: assets/img/publication_preview/video.gif
 importance: 1
 category: work
-related_publications: true
+# related_publications: Meeran_2024_CVPR
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
-
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
-
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+Published at **[CVPR 2024 Workshop on Pixel Level Video Understanding in the Wild Challenge](https://openaccess.thecvf.com/content/CVPR2024W/PVUW/papers/Meeran_SAM-PM_Enhancing_Video_Camouflaged_Object_Detection_using_Spatio-Temporal_Attention_CVPRW_2024_paper.pdf)**
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
+        {% include figure.liquid loading="eager" path="assets/img/cvpr.png" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div> 
 </div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
+ <div class="caption">
+   Comparison of mask predictions between ground truth (GT), SAM-PM (Ours), and SLT-Net.
 </div>
+
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
+        {% include figure.liquid loading="eager" path="assets/img/prop.png" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div> 
 </div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
-
-You can also put regular text between your rows of images, even citations {% cite einstein1950meaning %}.
-Say you wanted to write a bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
-
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
+ <div class="caption">
+   Architecture of the proposed Propagation Module (PM).
 </div>
 
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
+## Methodology
+The proposed **SAM-PM** framework adapts the Segment Anything Model (SAM) for the **Video Camouflaged Object Detection (VCOD)** task. SAM-PM consists of two main components: the **Temporal Fusion Mask Module (TFMM)** and the **Memory Prior Affinity Module (MPAM)**.
+    
+1. **Temporal Fusion Mask Module (TFMM)**: This module enhances temporal information by integrating mask embeddings from multiple frames. It uses a spatio-temporal cross-attention mechanism to create temporally enriched mask embeddings.
+2. **Memory Prior Affinity Module (MPAM)**: MPAM utilizes the temporally infused mask embeddings from TFMM along with image embeddings from the current and previous frames. It applies affinity to strengthen temporal consistency in mask predictions.
+SAM-PM operates in a **semi-supervised manner**, where only the first frame's ground truth mask is used for training. The framework keeps SAM's weights frozen and trains only the SAM-PM components, ensuring **parameter efficiency** with less than 1 million parameters. 
 
-{% raw %}
-
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-</div>
-```
-
-{% endraw %}
+During training and inference, SAM-PM updates its memory with new frames and their predicted masks while discarding outdated data to maintain temporal coherence. 
