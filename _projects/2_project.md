@@ -3,7 +3,7 @@ layout: page
 title: Quark Gluon Reconstruction
 description:
 img: assets/img/qg_thumbnail.png
-importance: 2
+importance: 6
 category: work
 giscus_comments: false
 ---
